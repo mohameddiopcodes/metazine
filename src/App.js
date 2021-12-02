@@ -1,24 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Auth from './pages/Auth';
+import MyPublishings from './pages/MyPublishings';
+import Publishings from './pages/Publishings';
+import NewPublishing from './pages/NewPublishing';
+
+import {getUser} from './api/service';
 
 function App() {
+  const [user, setUser] = useState(null)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      <p>{user && user.name}</p>
+      {
+        user ?
+        <>
+          <Navbar user={user} setUser={setUser}/>
+          <Routes>
+            <Route path="/publishings/me" element={<MyPublishings/>} />
+            <Route path="/publishings" element={<Publishings/>} />
+            <Route path="/publishings/new" element={<NewPublishing/>} />
+          </Routes>
+        </>
+          :
+        <>
+          <Navbar user={user} setUser={setUser}/>
+          <Routes>
+            <Route path="/" element={<Home user={user} />} />
+            <Route path="/auth" element={<Auth setUser={setUser} />} />
+          </Routes>
+        </>
+      }
+    </main>
   );
 }
 
