@@ -8,7 +8,7 @@ require('dotenv').config()
 require('./config/database')
 
 const publishingsRouter = require('./routes/publishings');
-const metazinesRouter = require('./routes/metazines');
+const profilesRouter = require('./routes/profiles');
 const usersRouter = require('./routes/users');
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/publishings', publishingsRouter);
-app.use('/api/metazines', metazinesRouter);
+app.use('/api/profiles', profilesRouter);
 app.use('/api/users', usersRouter);
 
 app.use('/*', function(req, res) {

@@ -11,11 +11,11 @@ import NewPublishing from './pages/NewPublishing';
 import {getUser} from './api/service';
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(getUser())
+  const [activeProfile, setActiveProfile] = useState(user.profiles[0])
 
   return (
     <main className="App">
-      <p>{user && user.name}</p>
       {
         user ?
         <>
@@ -23,7 +23,7 @@ function App() {
           <Routes>
             <Route path="/publishings/me" element={<MyPublishings/>} />
             <Route path="/publishings" element={<Publishings/>} />
-            <Route path="/publishings/new" element={<NewPublishing/>} />
+            <Route path="/publishings/new" element={<NewPublishing profile={activeProfile} />} />
           </Routes>
         </>
           :

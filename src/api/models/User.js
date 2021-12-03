@@ -1,10 +1,15 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
+const profileSchema = require('./Profile')
+
 const SALT_ROUNDS = 8
 
 const userSchema = mongoose.Schema({
-    name: {type: String, required: true},
+    name: {
+        type: String, 
+        required: true
+    },
     email: {
         type: String,
         unique: true,
@@ -17,6 +22,10 @@ const userSchema = mongoose.Schema({
         trim: true,
         minLength: 3,
         required: true
+    },
+    profiles: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Profile'
     }
 }, {
     timestamps: true,

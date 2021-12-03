@@ -15,6 +15,9 @@ export default function Navbar({ user, setUser }) {
         <nav>
             {user ?
                 <>
+                    {
+                        user.profiles.map( p => <p>{p.name}</p> )
+                    }
                     <Link to="/publishings">All Publishings</Link>{' | '}
                     <Link to="/publishings/me">My Publishings</Link>{' | '}
                     <Link to="/publishings/new">New Publishing</Link>
@@ -22,8 +25,8 @@ export default function Navbar({ user, setUser }) {
                 </>
             :
                 <>
-                    <Link to="/auth">Auth</Link>{' | '}
-                    <Link to="/">Home</Link>
+                    <Link to="/">Home</Link>{' | '}
+                    <Link to="/auth">Auth</Link>
                 </>
             }
         </nav>

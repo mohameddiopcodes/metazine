@@ -2,6 +2,7 @@ import './styles/Auth.css'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { logIn, signUp } from '../api/service'
+import onDataChange from '../utilities/onDataChange'
 
 export default function Auth({ setUser }) {
     const navigate = useNavigate()
@@ -19,10 +20,6 @@ export default function Auth({ setUser }) {
     function switchToLogIn(e) {
         setCreate(false)
         setUserData({})
-    }
-
-    function onUserDataChange(e) {
-        setUserData({...userData, [e.target.name]: e.target.value})
     }
 
     async function handleLogIn(e) {
@@ -55,18 +52,18 @@ export default function Auth({ setUser }) {
             {
                 create ?
                     <form onSubmit={handleSignUp}>
-                        <input type='text' name='name' onChange={onUserDataChange} value={userData.name || ''} />
-                        <input type='text' name='email' onChange={onUserDataChange} value={userData.email || ''} />
-                        <input type='text' name='password' onChange={onUserDataChange} value={userData.password || ''} />
-                        <input type='text' name='confirm' onChange={onUserDataChange} value={userData.confirm || ''} />
+                        <input type='text' name='name' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.name || ''} />
+                        <input type='text' name='email' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.email || ''} />
+                        <input type='text' name='password' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.password || ''} />
+                        <input type='text' name='confirm' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.confirm || ''} />
                         <input type='submit' />
                         <button onClick={switchToLogIn}>already have an account ?</button>
                     </form>
                 :
                     <form  onSubmit={handleLogIn}>
-                        <input type='text' name='email' onChange={onUserDataChange} value={userData.email || ''} />
-                        <input type='text' name='password' onChange={onUserDataChange} value={userData.password || ''} />
-                        <input type='submit' onChange={onUserDataChange} />
+                        <input type='text' name='email' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.email || ''} />
+                        <input type='text' name='password' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.password || ''} />
+                        <input type='submit' onChange={(e) => onDataChange(e, setUserData, userData)} />
                         <button disabled={disable} onClick={switchToSignUp}>create an account ?</button>
                     </form>
             }

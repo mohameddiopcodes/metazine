@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const publishingsCtrl = require('../controllers/publishingsCtrl')
+
+router.post('/', publishingsCtrl.create);
+router.get('/', publishingsCtrl.index);
+router.post('/me', publishingsCtrl.me);
 
 module.exports = router;
