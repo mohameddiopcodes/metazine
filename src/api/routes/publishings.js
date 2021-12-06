@@ -3,8 +3,8 @@ const router = express.Router();
 
 const publishingsCtrl = require('../controllers/publishingsCtrl')
 
-router.post('/', publishingsCtrl.create);
+router.get('/me', publishingsCtrl.me);
 router.get('/', publishingsCtrl.index);
-router.post('/me', publishingsCtrl.me);
+router.post('/', publishingsCtrl.create);
 
 module.exports = router;

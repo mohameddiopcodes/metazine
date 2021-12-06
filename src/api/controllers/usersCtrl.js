@@ -12,14 +12,12 @@ module.exports = {
 async function create(req, res) {
     try {
         const user = new User(req.body)
-        console.log("======")
-        console.log(user._id)
-        console.log("======")
         const profile = new Profile({user: user._id, name: user.name})
         user.profiles.push(profile)
         await user.save()
         await profile.save()
-        res.json({ token: createJWT(user) })
+        console.log(await user.populate('profiles').exec())
+        res.json({ token: createJWT(await user.populate('profiles').exec()) })
     } catch(e) {
         res.status(401).json({ message: e.message });
     }
@@ -28,10 +26,11 @@ async function create(req, res) {
 const SALT_ROUNDS = 8
 async function logIn(req, res) {
     try {
-        const user = await User.findOne({ email: req.body.email });
+        const user = await User.findOne({ email: req.body.email }).populate('profiles').exec();
         if (!user) throw new Error();
         const match = await bcrypt.compare(req.body.password, user.password);
         if (!match) throw new Error();
+        console.log(user)
         res.json({ token: createJWT(user) });
     } catch {
         res.status(400).json('Try again, something went wrong');

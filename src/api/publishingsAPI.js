@@ -1,6 +1,6 @@
 import sendRequest from './utilities/sendRequest'
 
-const BASE_URL = 'api/publishings'
+const BASE_URL = '/api/publishings'
 
 export async function create(publishingData) {
     return sendRequest(BASE_URL, 'POST', publishingData)

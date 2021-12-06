@@ -12,8 +12,8 @@ import {getUser} from './api/service';
 
 function App() {
   const [user, setUser] = useState(getUser())
-  const [activeProfile, setActiveProfile] = useState(user.profiles[0])
-
+  const [activeProfile, setActiveProfile] = useState(user ? user.profiles[0]:null)
+  
   return (
     <main className="App">
       {

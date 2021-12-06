@@ -16,7 +16,7 @@ export default function Navbar({ user, setUser }) {
             {user ?
                 <>
                     {
-                        user.profiles.map( p => <p>{p.name}</p> )
+                        user.profiles.map( p => <p key={p.createdAt}>{p.name}</p> )
                     }
                     <Link to="/publishings">All Publishings</Link>{' | '}
                     <Link to="/publishings/me">My Publishings</Link>{' | '}

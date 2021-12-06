@@ -1,6 +1,6 @@
 import sendRequest from './utilities/sendRequest'
 
-const BASE_URL = 'api/profiles'
+const BASE_URL = '/api/profiles'
 
 export async function create(profileData) {
     return sendRequest(BASE_URL, 'POST', profileData)

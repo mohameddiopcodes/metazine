@@ -22,7 +22,7 @@ const publishingSchema = mongoose.Schema({
         required: true
     },
     content: {
-        type: Buffer
+        type: String
     },
     likes: {
         type: Number,
