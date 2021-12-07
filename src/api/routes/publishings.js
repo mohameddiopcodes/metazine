@@ -4,6 +4,7 @@ const router = express.Router();
 const publishingsCtrl = require('../controllers/publishingsCtrl')
 
 router.get('/me/:profileId', publishingsCtrl.me);
+router.get('/:id', publishingsCtrl.show);
 router.get('/', publishingsCtrl.index);
 router.post('/', publishingsCtrl.create);
 

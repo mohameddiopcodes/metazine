@@ -42,6 +42,10 @@ export async function myPublishings(profileId) {
     return await publishingsAPI.me(profileId)
 }
 
+export async function findPublishing(id) {
+    return await publishingsAPI.find(id)
+}
+
 //profiles
 export async function createProfile(profileData) {
     return await profilesAPI.create(profileData)

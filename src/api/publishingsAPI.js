@@ -13,3 +13,7 @@ export async function index() {
 export async function me(profileId) {
     return sendRequest(`${BASE_URL}/me/${profileId}`)
 }
+
+export async function find(id) {
+    return sendRequest(`${BASE_URL}/${id}`)
+}
