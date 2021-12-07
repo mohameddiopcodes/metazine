@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react/cjs/react.development'
 
 import { createPublishing } from '../api/service'
 import onDataChange from '../utilities/onDataChange'
@@ -9,16 +10,21 @@ export default function NewPublishing({ profile }) {
     const navigate = useNavigate()
 
     const [addCollection, setAddCollection] = useState(false)
+    const [shares, setShare] = useState([{profile, percentage: 100}])
     const [error, setError] = useState(null)
     const [publishingData, setPublishingData] = useState({})
     const [collectionData, setCollectionData] = useState('')
     const [collections, setCollections] = useState((profile && profile.collections) || [])
+    
+    useEffect(function() {
+        setPublishingData({ ...publishingData, shares })
+    }, [])
 
     async function onNewPublishing(e) {
         try {
             e.preventDefault()
             await createPublishing(publishingData)
-            navigate('/publishings/me')
+            navigate(`/publishings/me/${profile._id}`)
         } catch(e) {
             setError({ message: e.message })
         }

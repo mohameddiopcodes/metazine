@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { logIn, signUp } from '../api/service'
 import onDataChange from '../utilities/onDataChange'
 
-export default function Auth({ setUser }) {
+export default function Auth({ user, setUser, setActiveProfile }) {
     const navigate = useNavigate()
     const [create, setCreate] = useState(false)
     const [error, setError] = useState('')
@@ -22,12 +22,17 @@ export default function Auth({ setUser }) {
         setUserData({})
     }
 
-    async function handleLogIn(e) {
+    function handleLogIn(e) {
         try {
             e.preventDefault()
-            setUser(await logIn(userData))
-            setUserData({})
-            navigate('/publishings')
+            logIn(userData)
+                .then( user => {
+                    setUser(user)
+                    setActiveProfile(user.profiles[0])
+                    setUserData({})
+                    navigate('/publishings')
+                })
+                .catch( e => {throw new Error(e.message)})
         } catch(e) {
             setError(e)
         }

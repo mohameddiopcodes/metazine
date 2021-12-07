@@ -38,8 +38,8 @@ export async function allPublishings() {
     return await publishingsAPI.index()
 }
 
-export async function myPublishings() {
-    return await publishingsAPI.me()
+export async function myPublishings(profileId) {
+    return await publishingsAPI.me(profileId)
 }
 
 //profiles

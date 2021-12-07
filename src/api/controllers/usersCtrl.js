@@ -11,13 +11,14 @@ module.exports = {
 
 async function create(req, res) {
     try {
-        const user = new User(req.body)
+        let user = new User(req.body)
         const profile = new Profile({user: user._id, name: user.name})
         user.profiles.push(profile)
         await user.save()
         await profile.save()
-        console.log(await user.populate('profiles').exec())
-        res.json({ token: createJWT(await user.populate('profiles').exec()) })
+
+        user = await User.populate(user, 'profiles')
+        res.json({ token: createJWT(user) })
     } catch(e) {
         res.status(401).json({ message: e.message });
     }

@@ -26,7 +26,9 @@ async function index(req, res) {
 
 async function me(req, res) {
     try {
-        const publishings = await Publishing.find({ user: req.user })
+        const profileId = req.params.profileId
+        console.log(profileId)
+        const publishings = await Publishing.find({ 'shares.profile': profileId })
         res.json(publishings)
     } catch(e) {
         res.status(500).json({message: e.message})

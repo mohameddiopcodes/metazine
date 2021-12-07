@@ -10,6 +10,6 @@ export async function index() {
     return sendRequest(BASE_URL)
 }
 
-export async function me() {
-    return sendRequest(`${BASE_URL}/me`)
+export async function me(profileId) {
+    return sendRequest(`${BASE_URL}/me/${profileId}`)
 }
