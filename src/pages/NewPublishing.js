@@ -24,7 +24,7 @@ export default function NewPublishing({ profile }) {
         try {
             e.preventDefault()
             await createPublishing(publishingData)
-            navigate(`/publishings/me/${profile._id}`)
+            navigate(`/publishings/me`)
         } catch(e) {
             setError({ message: e.message })
         }

@@ -62,6 +62,7 @@ export default function Navbar({ user, setUser, profile, setProfile }) {
                                 </form>
                             }
                             <button onClick={() => setShowProfileForm(!showProfileForm)}>New Profile</button>
+                            <button><Link to="/settings">Settings</Link></button>
                             <button onClick={handleLogOut}>LogOut</button>  
                         </div>
                     }

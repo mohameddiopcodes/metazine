@@ -8,6 +8,7 @@ import MyPublishings from './pages/MyPublishings';
 import Publishings from './pages/Publishings';
 import Publishing from './pages/Publishing';
 import NewPublishing from './pages/NewPublishing';
+import Settings from './pages/Settings';
 
 import {getUser, findProfile} from './api/service';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/publishings" element={<Publishings />} />
             <Route path="/publishings/:id" element={<Publishing/>} />
             <Route path="/publishings/new" element={<NewPublishing profile={profile} />} />
+            <Route path="/settings" element={<Settings profile={profile} />} />
           </Routes>
         </>
           :

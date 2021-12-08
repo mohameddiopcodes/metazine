@@ -5464,6 +5464,11 @@
     "biskviit" "1.0.1"
     "encoding" "0.1.12"
 
+"fflate@^0.7.1":
+  "integrity" "sha512-VYM2Xy1gSA5MerKzCnmmuV2XljkpKwgJBKezW+495TTnTCh1x5HcYa1aH8wRU/MfTGhW4ziXqgwprgQUVl3Ohw=="
+  "resolved" "https://registry.npmjs.org/fflate/-/fflate-0.7.1.tgz"
+  "version" "0.7.1"
+
 "figgy-pudding@^3.5.1":
   "integrity" "sha512-0btnI/H8f2pavGMN8w40mlSKOfTK2SVJmBfBeVIj3kNw0swwgzyRq0d5TJVOwodFmtvpPeWPN/MCcfuWF0Ezbw=="
   "resolved" "https://registry.npmjs.org/figgy-pudding/-/figgy-pudding-3.5.2.tgz"
