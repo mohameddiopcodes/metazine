@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { myPublishings as Publishings } from "../api/service"
 
-export default function MyPublishings() {
+export default function MyPublishings({ profile }) {
     const [myPublishings, setMyPublishings] = useState([])
 
-    const { profileId } = useParams()
-
     useEffect(function() {
-        (async () => setMyPublishings([...await Publishings(profileId)])) ()
-    }, [])
+        profile && (async () => setMyPublishings([...await Publishings(profile._id)])) ()
+    }, [profile])
 
     return (
         <main>

@@ -5,6 +5,7 @@ const profileSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId
     },
     name: String,
+    image: String,
     publishings: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Publishing'

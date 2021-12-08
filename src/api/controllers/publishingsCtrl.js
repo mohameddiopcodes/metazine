@@ -1,3 +1,4 @@
+const Profile = require('../models/Profile')
 const Publishing = require('../models/Publishing')
 
 module.exports = {

@@ -10,6 +10,7 @@ require('./config/database')
 const publishingsRouter = require('./routes/publishings');
 const profilesRouter = require('./routes/profiles');
 const usersRouter = require('./routes/users');
+const checkToken = require('./config/checkToken');
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use(express.static(path.join(__dirname, '../../build')));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.json({limit: '50mb'}));
+
+app.use(checkToken)
 
 app.use('/api/publishings', publishingsRouter);
 app.use('/api/profiles', profilesRouter);

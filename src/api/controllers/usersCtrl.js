@@ -16,8 +16,7 @@ async function create(req, res) {
         user.profiles.push(profile)
         await user.save()
         await profile.save()
-
-        user = await User.populate(user, 'profiles')
+        
         res.json({ token: createJWT(user) })
     } catch(e) {
         res.status(401).json({ message: e.message });
@@ -27,11 +26,10 @@ async function create(req, res) {
 const SALT_ROUNDS = 8
 async function logIn(req, res) {
     try {
-        const user = await User.findOne({ email: req.body.email }).populate('profiles').exec();
+        const user = await User.findOne({ email: req.body.email });
         if (!user) throw new Error();
         const match = await bcrypt.compare(req.body.password, user.password);
         if (!match) throw new Error();
-        console.log(user)
         res.json({ token: createJWT(user) });
     } catch {
         res.status(400).json('Try again, something went wrong');

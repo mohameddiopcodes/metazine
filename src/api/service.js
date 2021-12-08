@@ -25,8 +25,20 @@ export function getUser() {
     return token ? JSON.parse(window.atob(token.split('.')[1])).user : null;
 }
 
+export async function updateToken() {
+    // let token = getToken();
+    // const user = token ? JSON.parse(window.atob(token.split('.')[1])).user : null;
+    // if(user) {
+    //     localStorage.removeItem('token')
+    //     token = await logIn({email: user.email, password: user.password})
+    //     console.log(token)
+    //     localStorage.setItem('token', token)
+    // }
+}
+
 export function LogOut() {
     localStorage.removeItem('token')
+    localStorage.removeItem('profile')
 }
 
 //publishings
@@ -57,4 +69,8 @@ export async function allProfiles() {
 
 export async function myProfiles() {
     return await profilesAPI.me()
+}
+
+export async function findProfile(id) {
+    return await profilesAPI.find(id)
 }
