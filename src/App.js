@@ -15,6 +15,7 @@ import {getUser, findProfile} from './api/service';
 function App() {
   const [user, setUser] = useState(getUser())
   const [profile, setProfile] = useState(null)
+  const [rootMessage, setRootMessage] = useState('')
 
   useEffect(function() {
     try {
@@ -37,15 +38,16 @@ function App() {
             <Route path="/publishings" element={<Publishings />} />
             <Route path="/publishings/:id" element={<Publishing/>} />
             <Route path="/publishings/new" element={<NewPublishing profile={profile} />} />
-            <Route path="/settings" element={<Settings profile={profile} setProfile={setProfile} />} />
+            <Route path="/settings" element={<Settings profile={profile} setProfile={setProfile} user={user} setUser={setUser} setRootMessage={setRootMessage}/>} />
           </Routes>
         </>
           :
         <>
           <Navbar user={user} setUser={setUser}/>
+          {rootMessage && <p>{rootMessage}</p>}
           <Routes>
             <Route path="/" element={<Home user={user} />} />
-            <Route path="/auth" element={<Auth user={user} setUser={setUser} setProfile={setProfile} />} />
+            <Route path="/auth" element={<Auth user={user} setUser={setUser} setProfile={setProfile} setRootMessage={setRootMessage} />} />
           </Routes>
         </>
       }

@@ -35,7 +35,7 @@ async function logIn(req, res) {
         if (!match) throw new Error('The password is incorrect');
         res.json({ token: createJWT(user) });
     } catch {
-        res.status(400).json('Try again, something went wrong');
+        res.status(400).json({message: 'Double check, your email or password may be wrong'});
     }
 }
 
@@ -73,7 +73,9 @@ async function deleteAccount(req, res) {
     try {
         const match = await bcrypt.compare(req.body.password, req.user.password);
         if(!match) throw new Error('The password is incorrect')
-        await User.findByIdAndDelete(req.user._id)
+        const user = await User.findById(req.user._id)
+        user.remove()
+        res.json({})
     } catch(e) {
         res.status(401).json({message: e.message})
     }

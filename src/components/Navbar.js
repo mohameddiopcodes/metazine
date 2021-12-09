@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { createProfile, LogOut, myProfiles, updateToken } from '../api/service'
+import { createProfile, getUser, LogOut, myProfiles, updateToken } from '../api/service'
 import { useNavigate } from 'react-router-dom'
 import onDataChange from '../utilities/onDataChange'
 
@@ -18,21 +18,19 @@ export default function Navbar({ user, setUser, profile, setProfile }) {
         } catch (e) {
             setProfiles([])
         }
-    }, [])
+    }, [profile, showProfileForm])
 
-    function handleNewProfile(e) {
+    async function handleNewProfile(e) {
         e.preventDefault()
-        createProfile({...profileFormData, user: profile.user})
-            .then(updateToken)
-            .catch(e => console.log(e))
+        updateToken((await createProfile({...profileFormData, user: user._id})).token)
+        setUser(getUser())
+        setShowProfileForm(false)
         setProfileFormData({})
     }
 
-    function handleProfileChange(p) {
+    function handleProfileChange(e, p) {
         setProfile(p)
         localStorage.setItem('profile', p._id)
-        setShowProfileForm(false)
-        setShowProfiles(false)
     }
 
     function handleLogOut() {
@@ -54,13 +52,13 @@ export default function Navbar({ user, setUser, profile, setProfile }) {
                             <div>
                                 {
                                     profiles && profiles.map(p => (
-                                        <button style={profile.name === p.name ? {backgroundColor: 'orangered', color: '#FEFEFE'}:{}} onClick={() => handleProfileChange(p)}>{p.name}</button>
+                                        <button style={profile.name === p.name ? {backgroundColor: 'orangered', color: '#FEFEFE'}:{}} onClick={(e) => handleProfileChange(e, p)}>{p.name}</button>
                                         ))
                                     }
                             </div>
                             {showProfileForm &&
                                 <form onSubmit={handleNewProfile}>
-                                    <input type='text' name='name' onChange={(e) => onDataChange(e, setProfileFormData, profileFormData)} value={profileFormData ? profileFormData.name:''}/>
+                                    <input type='text' name='name' onChange={(e) => onDataChange(e, setProfileFormData, profileFormData)} value={profileFormData.name || ''}/>
                                     <input type='file' name='image' onChange={(e) => onDataChange(e, setProfileFormData, profileFormData)}/>
                                     <input type='submit' />
                                 </form>

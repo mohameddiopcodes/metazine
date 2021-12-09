@@ -1,3 +1,4 @@
+const User = require('../models/User')
 const Profile = require('../models/Profile')
 const { createJWT } = require('./usersCtrl')
 const bcrypt = require('bcryptjs')
@@ -16,8 +17,7 @@ async function create(req, res) {
         const profile = await Profile.create(req.body)
         req.user.profiles.push(profile)
         req.user.save()
-        console.log(req.user)
-        res.json(profile)
+        res.json({ token: createJWT(req.user) })
     } catch(e) {
         res.status(401).json({message: e.message})
     }
@@ -62,9 +62,10 @@ async function deleteProfile(req, res) {
     try {
         const match = await bcrypt.compare(req.body.password, req.user.password);
         if(!match) throw new Error('The password is incorrect')
-        req.user.profiles = req.user.profiles.filter(id => id !== req.params.id)
+        req.user.profiles = req.user.profiles.filter(id => id.toString() !== req.params.id)
         req.user.save()
         await Profile.findByIdAndDelete(req.params.id)
+        res.json({ token: createJWT(req.user) })
     } catch(e) {
         res.status(401).json({message: e.message})
     }

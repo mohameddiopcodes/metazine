@@ -5,8 +5,9 @@ import ProfilePicForm from "../components/Settings/ProfilePicForm";
 import UserInfoForm from "../components/Settings/UserInfoForm";
 import DeleteConfirmation from "../components/DeleteConfirmation";
 import onDataChange from "../utilities/onDataChange";
+import userEvent from "@testing-library/user-event";
 
-export default function Settings({ profile, setProfile }) {
+export default function Settings({ profile, setProfile, setUser, user, setRootMessage }) {
     const [selected, setSelected] = useState(null)
     const [formData, setFormData] = useState({})
     const [message, setMessage] = useState('')
@@ -39,15 +40,15 @@ export default function Settings({ profile, setProfile }) {
                     <h4>Profile Settings</h4>
                     <button style={{display: 'block'}} title='3' onClick={handleSelected}>profile information</button>
                     <button style={{display: 'block'}} title='4' onClick={handleSelected}>profile picture</button>
-                    <button style={{display: 'block'}} title='6' onClick={handleSelected}>delete profile</button>
+                    <button disabled={user.profiles.length === 1} style={{display: 'block'}} title='6' onClick={handleSelected}>delete profile</button>
                 </div>
             }
             { selected === 1 && <UserInfoForm unselect={unselect} handleOnDataChange={handleOnDataChange} setProfile={setProfile} formData={formData} /> }
             { selected === 2 && <PasswordForm unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} /> }
             { selected === 3 && <ProfileInfoForm unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} profile={profile} setProfile={setProfile} /> }
             { selected === 4 && <ProfilePicForm unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} profile={profile} setProfile={setProfile} /> }
-            { selected === 5 && <DeleteConfirmation entity='account' unselect={unselect} /> }
-            { selected === 6 && <DeleteConfirmation entity='profile' unselect={unselect} /> }
+            { selected === 5 && <DeleteConfirmation entity='account' unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} setUser={setUser} setRootMessage={setRootMessage} /> }
+            { selected === 6 && <DeleteConfirmation entity='profile' unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} profile={profile} setUser={setUser} /> }
             </>
             
     )

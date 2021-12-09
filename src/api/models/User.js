@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
-const profileSchema = require('./Profile')
+const Profile = require('./Profile')
 
 const SALT_ROUNDS = 8
 
@@ -41,6 +41,14 @@ userSchema.pre('save', async function(next) {
     if(!this.isModified('password')) return next()
 
     this.password =  await bcrypt.hash(this.password, SALT_ROUNDS)
+    return next()
+})
+
+userSchema.pre('remove', async function(next) {
+    console.log('removing...')
+    this.profiles.forEach(p => {
+        (async () => console.log(await Profile.findByIdAndDelete(p)))()
+    })
     return next()
 })
 

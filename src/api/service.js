@@ -82,5 +82,5 @@ export async function updateProfile(id, data) {
 }
 
 export async function deleteProfile(id, credentials) {
-    return await profilesAPI.deleteProfile(id, credentials)
+    return profilesAPI.deleteProfile(id, credentials)
 }
