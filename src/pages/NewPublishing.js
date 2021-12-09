@@ -34,6 +34,7 @@ export default function NewPublishing({ profile }) {
         e.preventDefault()
         setCollections([...collections, collectionData.collection])
         setCollectionData({ collection: '' })
+        setAddCollection(false)
     }
 
     return (

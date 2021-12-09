@@ -27,7 +27,10 @@
     display: block;
     text-decoration: none;
     padding: 2em;
-    background: #333;
+    background: url('https://images.unsplash.com/photo-1575722290270-626b0208df99?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dGV4dHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     color: #fefefe;
     box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     border-bottom-left-radius: 10px;

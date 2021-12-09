@@ -21,10 +21,4 @@ const profileSchema = mongoose.Schema({
     }
 })
 
-profileSchema.virtual('collections').get(function() {
-    let collections = []
-    collections = this.publishings.forEach(async p => collections.push((await Publishing.findById(p)).collection))
-    return collections
-})
-
 module.exports = mongoose.model('Profile', profileSchema)

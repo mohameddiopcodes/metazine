@@ -1,6 +1,10 @@
 # Metazine
 
-A Place to share article, documentation or any interesting pdf [Create React App](https://github.com/facebook/create-react-app).
+A Place to share articles, documentation or any interesting pdfs and organise them.
+
+## Getting Started
+
+Visit the [website](https://metazine.herokuapp.com/) and check out the [Trello board](https://trello.com/b/4MQhIdDW/capstone-mohamed)
 
 ## Technologies Used
 
@@ -8,9 +12,18 @@ A Place to share article, documentation or any interesting pdf [Create React App
 - Expressjs
 - React
 - Nodejs
+- Heroku
+
+## Screenshots
+Home Page : 
+<img src="./screenshot1.png">
+
+List Page :
+<img src="./screenshot2.png">
 
 ## Future Improvements
 
 - Comments
 - Chat
-- Blockchain Integration
+- Blockchain Integration (Wallet Authentication ...)
+- Magazines

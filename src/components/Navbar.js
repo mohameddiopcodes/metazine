@@ -44,7 +44,7 @@ export default function Navbar({ user, setUser, profile, setProfile }) {
             {user ?
                 <>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                        {profile && profile.image ? <img style={{width: '30px', height: '30px', borderRadius: '50%'}} src={`data:image;base64, ${profile.image}`}/>:<img style={{width: '30px', height: '30px', borderRadius: '50%'}} src="/images/placeholder.jpeg"/>}
+                        {profile && profile.image ? <Link to='/publishings'><img style={{width: '30px', height: '30px', borderRadius: '50%'}} src={`data:image;base64, ${profile.image}`}/></Link>:<Link to='/publishings'><img style={{width: '30px', height: '30px', borderRadius: '50%'}} src="/images/placeholder.jpeg"/></Link>}
                         {profile && <p style={{margin: '0 1%'}}>{profile.name}</p>}
                         <button onClick={() => setShowProfiles(!showProfiles)}>+</button>
                     </div>

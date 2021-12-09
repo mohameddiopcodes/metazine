@@ -17,10 +17,6 @@ module.exports = {
 async function create(req, res) {
     try {
         const publishing = await Publishing.create(req.body)
-        const profile = await Profile.findById(publishing.shares[0].profile)
-        console.log(profile)
-        profile.publishings.push(publishing)
-        profile.save()
         res.json(publishing)
     } catch(e) {
         res.status(401).json({message: e.message})
@@ -39,7 +35,7 @@ async function index(req, res) {
 async function me(req, res) {
     try {
         const profile = Profile.findById(req.params.profileId)
-        const publishings = await Publishing.find({ 'shares.profile': profile._id })
+        const publishings = await Publishing.find({ 'shares.profile': req.params.profileId })
         res.json(publishings)
     } catch(e) {
         res.status(500).json({message: e.message})

@@ -88,11 +88,12 @@ form h2 {
 
 .render-message, .render-error {
   position: absolute;
-  top: 5em;
-  width: 93%;
+  z-index: 1001;
+  left: 2em;
+  top: 1em;
+  width: 20vw;
   padding: 1em 0;
   font-weight: 500;
-  border-radius: 10px;
   color: rgba(255, 255, 255, .8)
 }
 
