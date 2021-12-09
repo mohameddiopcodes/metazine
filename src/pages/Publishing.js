@@ -1,7 +1,7 @@
 import './styles/Publishing.css'
 import { useState } from "react"
 import { useParams } from "react-router"
-import { useEffect } from "react/cjs/react.development"
+import { useEffect } from "react"
 
 import { findPublishing } from '../api/service'
 import PublishingSettings from '../components/PublishingSettings'
@@ -12,7 +12,10 @@ export default function Publishing() {
     const [selected, setSelected] = useState(1)
 
     useEffect(function() {
-        id && (async () => setPublishing(await findPublishing(id)))()
+        id && (async () => {
+            const p = await findPublishing(id)
+            setPublishing(p)
+        })()
     }, [])
 
     return (
