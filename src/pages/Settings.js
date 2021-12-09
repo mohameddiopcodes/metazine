@@ -1,3 +1,4 @@
+import './styles/Settings.css'
 import { useState } from "react";
 import PasswordForm from "../components/Settings/PasswordForm";
 import ProfileInfoForm from "../components/Settings/ProfileInfoForm";
@@ -28,8 +29,8 @@ export default function Settings({ profile, setProfile, setUser, user, setRootMe
         onDataChange(e, setFormData, formData)
     }
     return (
-            <>
-            { message && <p>{message}</p>}
+            <main className='Settings'>
+            { message && <p class='render-message'>{message}</p>}
             {
                 !selected && 
                 <div style={{maxWidth: '350px', margin: '2em auto', textAlign: 'left'}}>
@@ -49,7 +50,7 @@ export default function Settings({ profile, setProfile, setUser, user, setRootMe
             { selected === 4 && <ProfilePicForm unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} profile={profile} setProfile={setProfile} /> }
             { selected === 5 && <DeleteConfirmation entity='account' unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} setUser={setUser} setRootMessage={setRootMessage} /> }
             { selected === 6 && <DeleteConfirmation entity='profile' unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} profile={profile} setUser={setUser} /> }
-            </>
+            </main>
             
     )
 }

@@ -19,12 +19,15 @@ export default function PasswordForm({ unselect, handleOnDataChange, formData })
 
     return (
         <>
-        {error && <p>{error}</p>}
-        <form onSubmit={handleSubmit} >
+        {error && <p class='render-error'>{error}</p>}
+        <form onSubmit={handleSubmit}  autoComplete='off'>
             <h4>Edit Password</h4>
             <button onClick={unselect}>Go Back</button>
+            <label for="prevPassword">Previous Password</label>
             <input type='password' name='prevPassword' onChange={handleOnDataChange} />
+            <label for="password">Enter New Password</label>
             <input type='password' name='password' onChange={handleOnDataChange} />
+            <label for="confirm">Confirm New Password</label>
             <input type='password' name='confirm' onChange={handleOnDataChange} />
             <input type='submit'/>
         </form>

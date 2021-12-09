@@ -37,15 +37,17 @@ export default function DeleteConfirmation({ entity, unselect, handleOnDataChang
 
     return (
         <>
-            {error && <p>{error}</p>}
+            {error && <p class='render-error'>{error}</p>}
             <h2>You are about to delete your {entity}.</h2>
             <p>Are you sure ?</p>
             <button onClick={() => setConfirmed(!confirmed)}>Yes</button>
             <button onClick={unselect}>No</button>
             {
                 confirmed &&
-                    <form onSubmit={handleDelete}>
+                    <form onSubmit={handleDelete} autoComplete='off'>
+                        <label for='password' >Enter Password</label>
                         <input type='password' name='password' onChange={handleOnDataChange} />
+                        <label for='confirm' >Confirm Password</label>
                         <input type='password' name='confirm' onChange={handleOnDataChange} />
                         <input type='submit' />
                     </form>

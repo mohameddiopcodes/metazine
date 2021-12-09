@@ -35,13 +35,15 @@ export default function PublishingSettings({ id, setSelectedParent }) {
 
     return (
         <div>
-            {error && <p>{error}</p>}
+            {error && <p class='render-error'>{error}</p>}
             <button disabled={selected === 1} onClick={() => setSelected(1)} >change information</button>
             <button disabled={selected === 2} onClick={() => setSelected(2)} >change content</button>
             <button disabled={selected === 3} onClick={() => setSelected(3)} >delete</button>
             {selected === 1 && 
-                <form onSubmit={handleSubmit} >
+                <form onSubmit={handleSubmit}  autoComplete='off'>
+                    <label for='name' >Enter Title</label>
                     <input type='text' name='name' onChange={handleOnDataChange} />
+                    <label for='name' >Select Category</label>
                     <select name="category" defaultValue='Choose a category' onChange={handleOnDataChange} >
                             <option disabled>Choose a category</option>
                             <option>Art</option>
@@ -57,15 +59,20 @@ export default function PublishingSettings({ id, setSelectedParent }) {
                             <option>Fashion</option>
                             <option>Sport</option>
                     </select>
+                    <label for='password' >Enter Password</label>
                     <input type='password' name='password' onChange={handleOnDataChange} />
+                    <label for='confirm' >Confirm Password</label>
                     <input type='password' name='confirm' onChange={handleOnDataChange} />
                     <input type='submit' />
                 </form>
             }
             {selected === 2 && 
                 <form onSubmit={handleSubmit} >
+                    <label for='content' >Upload Content</label>
                     <input type='file' name='content' onChange={handleOnDataChange} />
+                    <label for='password' >Enter Password</label>
                     <input type='password' name='password' onChange={handleOnDataChange} />
+                    <label for='confirm' >Confirm Password</label>
                     <input type='password' name='confirm' onChange={handleOnDataChange} />
                     <input type='submit' />
                 </form>

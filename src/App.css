@@ -1,5 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'Open Sans' sans-serif;
+}
+
+button {
+  margin: 2em 0;
+  padding: 1em 2em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, .31)
+}
+
+.below {
+  position: absolute;
+  z-index: 10;
+  bottom: 1em;
+  text-decoration: none;
+  font-size: 2em;
+  z-index: 11;
+}
+
+.below:hover {
+  transform: scale(1.1);
+}
+
+.below p {
+  position: #fff;
+  margin: 0;
+  font-size: 10px
+}
+
+form {
+  padding: 3em 2em 2em 1em;
+  height: 40vh;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  margin: 0 auto;
+  background: #fff
+}
+
+form label {
+  padding: 0 .2em;
+  width: 85%;
+  text-align: left;
+  background-color: white;
+  position: relative;
+}
+
+form input, select {
+  width: 80%;
+  padding: 1em 2em 1em 1em
+}
+
+form input[type=submit] {
+  margin-top: 4em;
+  width: 30%;
+  border: 0;
+  padding: 1em 2em;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: rgb(206, 90, 48);
+}
+
+form input[type=submit]:hover {
+  background-color: rgb(165, 71, 36);
+}
+
+form h2 {
+  width: 85%;
+  text-align: left;
+}
+
+.render-message, .render-error {
+  position: absolute;
+  top: 5em;
+  width: 93%;
+  padding: 1em 0;
+  font-weight: 500;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, .8)
+}
+
+.render-message {
+  background: rgb(90, 186, 90)
+}
+
+.render-error {
+  background: rgb(198, 20, 20)
 }
 
 @keyframes App-logo-spin {

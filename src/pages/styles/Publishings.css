@@ -1,0 +1,39 @@
+.Publishings {
+    background: linear-gradient(0deg, rgba(255,250,230,1) 0%, rgba(255,205,164,1) 77%);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.Publishings .card {
+    text-decoration: none;
+    color: #222;
+    max-height: 350px;
+    background: white;
+    border-radius: 10px;
+    margin: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    position: relative
+}
+
+.Publishings .card:hover {
+    transform: scale(1.1);
+}
+
+.card a {
+    display: block;
+    text-decoration: none;
+    padding: 2em;
+    background: #333;
+    color: #fefefe;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px
+}
+
+.card .plus {
+    font-size: 5em
+}

@@ -19,13 +19,17 @@ export default function UserInfoForm({ unselect, handleOnDataChange, setProfile,
 
     return (
         <>
-        { error && <p>{error}</p> }
-        <form onSubmit={handleSubmit} >
+        { error && <p class='render-error'>{error}</p> }
+        <form onSubmit={handleSubmit}  autoComplete='off'>
             <h4>Edit User Information</h4>
             <button onClick={unselect}>Go Back</button>
+            <label for='name' >Name</label>
             <input type='text' name='name' onChange={handleOnDataChange} />
+            <label for='email' >Email</label>
             <input type='text' name='email' onChange={handleOnDataChange} />
+            <label for='password' >Password</label>
             <input type='password' name='password' onChange={handleOnDataChange} />
+            <label for='confirm' >Password</label>
             <input type='password' name='confirm' onChange={handleOnDataChange} />
             <input type='submit'/>
         </form>

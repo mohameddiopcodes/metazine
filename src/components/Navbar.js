@@ -1,3 +1,4 @@
+import './styles/Navbar.css'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { createProfile, getUser, LogOut, myProfiles, updateToken } from '../api/service'
@@ -39,7 +40,7 @@ export default function Navbar({ user, setUser, profile, setProfile }) {
         navigate('/auth')
     }
     return (
-        <nav style={{marginTop: '2em'}}>
+        <nav>
             {user ?
                 <>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -57,8 +58,10 @@ export default function Navbar({ user, setUser, profile, setProfile }) {
                                     }
                             </div>
                             {showProfileForm &&
-                                <form onSubmit={handleNewProfile}>
+                                <form onSubmit={handleNewProfile} autoComplete='off'>
+                                    <label style={{color: '#000'}} for='name'>Enter Name</label>
                                     <input type='text' name='name' onChange={(e) => onDataChange(e, setProfileFormData, profileFormData)} value={profileFormData.name || ''}/>
+                                    <label style={{color: '#000'}} for='file'>Upload Image</label>
                                     <input type='file' name='image' onChange={(e) => onDataChange(e, setProfileFormData, profileFormData)}/>
                                     <input type='submit' />
                                 </form>

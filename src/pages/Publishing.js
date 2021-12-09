@@ -1,3 +1,4 @@
+import './styles/Publishing.css'
 import { useState } from "react"
 import { useParams } from "react-router"
 import { useEffect } from "react/cjs/react.development"
@@ -15,7 +16,7 @@ export default function Publishing() {
     }, [selected])
 
     return (
-        <>
+        <main className='Publishing'>
             <button disabled={selected === 1} onClick={() => setSelected(1)}>View</button>
             <button disabled={selected === 2} onClick={() => setSelected(2)}>Settings</button>
             {publishing && <p>{publishing.name}</p>}
@@ -28,6 +29,6 @@ export default function Publishing() {
                 selected === 2 && publishing &&
                     <PublishingSettings id={id} setSelectedParent={setSelected} />
             }
-        </>
+        </main>
     )
 }

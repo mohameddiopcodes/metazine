@@ -18,8 +18,7 @@ const publishingSchema = mongoose.Schema({
         required: true
     },
     series: {
-        type: String,
-        required: true
+        type: String
     },
     content: {
         type: String

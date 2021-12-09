@@ -1,3 +1,4 @@
+import './styles/NewPublishing.css'
 import { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
@@ -36,20 +37,23 @@ export default function NewPublishing({ profile }) {
     }
 
     return (
-        <main>
-            {error && <p>{error.message}</p>}
+        <main className='NewPublishing'>
+            {error && <p class='render-error'>{error.message}</p>}
             {/*addCollection*/}
             <button onClick={() => {setAddCollection(!addCollection)}} >Want to add a new collection ?</button>
             {addCollection && (
-                <form onSubmit={onNewCollection}>
+                <form className='collection-form' onSubmit={onNewCollection} autoComplete='off'>
+                    <label for='collection'>Enter a collection</label>
                     <input type='text' name='collection' onChange={(e) => onDataChange(e, setCollectionData, collectionData)} value={collectionData.collection} required />
                     <input type='submit'/>
                 </form>
             )}
             {/*addPublishing*/}
             {profile && 
-            <form onSubmit={onNewPublishing}>
+            <form onSubmit={onNewPublishing} autoComplete='off'>
+                <label for='name'>Enter Name</label>
                 <input type='text' name="name" onChange={(e) => onDataChange(e, setPublishingData, publishingData)} required />
+                <label for='category'>Select Category</label>
                 <select name="category" onChange={(e) => onDataChange(e, setPublishingData, publishingData)} defaultValue='Choose a category' required >
                         <option disabled>Choose a category</option>
                         <option>Art</option>
@@ -77,6 +81,7 @@ export default function NewPublishing({ profile }) {
                     <option>No collection added</option>
                 }
                 </select>
+                <label for='file'>Select File</label>
                 <input type="file" name="content" onChange={(e) => onDataChange(e, setPublishingData, publishingData)} required />
                 <input type="submit" />
             </form>}

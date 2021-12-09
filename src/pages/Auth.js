@@ -52,21 +52,29 @@ export default function Auth({ user, setUser, setProfile, setRootMessage }) {
     }, [])
 
     return (
-        <main>
-            {error && <p>{error}</p>}
+        <main className='Auth'>
+            {error && <p  class='render-error' >{error}</p>}
             {
                 create ?
                     <form onSubmit={handleSignUp}>
+                        <h2>Sign Up</h2>
+                        <label for="name">Name</label>
                         <input type='text' name='name' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.name || ''} />
+                        <label for="email">Email</label>
                         <input type='text' name='email' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.email || ''} />
+                        <label for="password">Password</label>
                         <input type='password' name='password' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.password || ''} />
+                        <label for="confirm">Confirm</label>
                         <input type='password' name='confirm' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.confirm || ''} />
                         <input type='submit' />
                         <button onClick={switchToLogIn}>already have an account ?</button>
                     </form>
                 :
-                    <form  onSubmit={handleLogIn}>
+                <form  onSubmit={handleLogIn}>
+                        <h2>Log In</h2>
+                        <label for="email">Email</label>
                         <input type='text' name='email' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.email || ''} />
+                        <label for="password">Password</label>
                         <input type='password' name='password' onChange={(e) => onDataChange(e, setUserData, userData)} value={userData.password || ''} />
                         <input type='submit' onChange={(e) => onDataChange(e, setUserData, userData)} />
                         <button onClick={switchToSignUp}>create an account ?</button>

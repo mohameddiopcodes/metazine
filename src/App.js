@@ -44,7 +44,7 @@ function App() {
           :
         <>
           <Navbar user={user} setUser={setUser}/>
-          {rootMessage && <p>{rootMessage}</p>}
+          {rootMessage && <p class='render-message'>{rootMessage}</p>}
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             <Route path="/auth" element={<Auth user={user} setUser={setUser} setProfile={setProfile} setRootMessage={setRootMessage} />} />

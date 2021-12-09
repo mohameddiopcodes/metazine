@@ -1,0 +1,96 @@
+.Home {
+    background: linear-gradient(0deg, rgba(255,250,230,1) 0%, rgba(255,205,164,1) 77%);
+}
+
+.home-thumbnail {
+    width: 100vw;
+    height: 800px;
+    background: url('https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1450&q=80');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative
+}
+
+.home-thumbnail div:not(.overlay) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.home-thumbnail h2 {
+    font-size: 50px;
+    font-weight: 400;
+    z-index: 100;
+    margin: 0
+}
+
+.home-thumbnail p {
+    font-size: 20px;
+    z-index: 100;
+    color: rgba(244, 244, 244, .8)
+}
+
+.thumbnail-btn {
+    padding: 1em 2em;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(206, 90, 48);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+    z-index: 100;
+    position: relative;
+    margin: .8em
+}
+
+.thumbnail-btn:hover {
+    background-color: rgb(165, 71, 36);
+    box-shadow: 0 0 40px rgba(0, 0, 0, .8);
+}
+
+.thumbnail-link {
+    color: rgba(244, 244, 244, .8);
+    z-index: 100;
+    position: relative
+}
+
+.thumbnail-link:hover {
+    color: #fff
+}
+
+#actions {
+    width: 100vw;
+    padding: 5% 0;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#actions .action-card {
+    padding: 2em;
+    width: 100%;
+    margin: 0 1em;
+    height: 100%;
+    border-radius: 10px;
+    background: url('https://images.unsplash.com/photo-1575722290270-626b0208df99?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dGV4dHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .5);
+    color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#actions .emoji {
+    font-size: 7em;
+    margin: 0
+}
