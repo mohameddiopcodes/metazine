@@ -12,8 +12,8 @@ export default function Publishing() {
     const [selected, setSelected] = useState(1)
 
     useEffect(function() {
-        (async () => setPublishing(await findPublishing(id)))()
-    }, [selected])
+        id && (async () => setPublishing(await findPublishing(id)))()
+    }, [])
 
     return (
         <main className='Publishing'>
