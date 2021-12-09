@@ -1,4 +1,7 @@
 const mongoose = require('mongoose')
+const { collection } = require('./Publishing')
+
+const Publishing = require('./Publishing')
 
 const profileSchema = mongoose.Schema({
     user: {
@@ -10,12 +13,17 @@ const profileSchema = mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Publishing'
     }
+},
+{
+    timestamps: true,
+    toJSON: {
+        virtuals: true
+    }
 })
 
 profileSchema.virtual('collections').get(function() {
-    const collections = []
-    this.populate('publishings').exec()
-    this.publishings.forEach(p => collections.push(p.collection))
+    let collections = []
+    collections = this.publishings.forEach(async p => collections.push((await Publishing.findById(p)).collection))
     return collections
 })
 

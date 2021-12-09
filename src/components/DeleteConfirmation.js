@@ -1,11 +1,9 @@
 import { useState } from "react"
-import { deleteProfile } from "../api/profilesAPI"
-import { getUser, LogOut, updateToken } from "../api/service"
-import { deleteAccount } from "../api/usersAPI"
+import { getUser, LogOut, updateToken, deleteProfile, deletePublishing, deleteAccount } from "../api/service"
 import { useNavigate } from "react-router-dom"
 
 
-export default function DeleteConfirmation({ entity, unselect, handleOnDataChange, formData, profile, setUser, setRootMessage }) {
+export default function DeleteConfirmation({ entity, unselect, handleOnDataChange, formData, profile, setUser, setRootMessage, publishingId }) {
     const [ error, setError ] = useState('')
     const [confirmed, setConfirmed] = useState(false)
     const navigate = useNavigate()
@@ -27,6 +25,10 @@ export default function DeleteConfirmation({ entity, unselect, handleOnDataChang
                 setUser(getUser())
                 localStorage.removeItem('profile')
                 unselect(null, 'Profile successfully deleted')
+            } else if(entity === 'publishing') {
+                await deletePublishing(publishingId, data)
+                navigate('/publishings/me')
+                unselect(null, 'Publishing successfully deleted')
             }
         } catch(e) {
             setError(e.message)

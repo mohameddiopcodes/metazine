@@ -1,16 +1,26 @@
+const { ObjectId } = require('mongoose').Schema.Types
 const Profile = require('../models/Profile')
 const Publishing = require('../models/Publishing')
+
+const bcrypt = require('bcryptjs')
+
 
 module.exports = {
     create,
     index,
     me,
-    show
+    show,
+    update,
+    delete: deletePublishing
 }
 
 async function create(req, res) {
     try {
         const publishing = await Publishing.create(req.body)
+        const profile = await Profile.findById(publishing.shares[0].profile)
+        console.log(profile)
+        profile.publishings.push(publishing)
+        profile.save()
         res.json(publishing)
     } catch(e) {
         res.status(401).json({message: e.message})
@@ -28,8 +38,8 @@ async function index(req, res) {
 
 async function me(req, res) {
     try {
-        const profileId = req.params.profileId
-        const publishings = await Publishing.find({ 'shares.profile': profileId })
+        const profile = Profile.findById(req.params.profileId)
+        const publishings = await Publishing.find({ 'shares.profile': profile._id })
         res.json(publishings)
     } catch(e) {
         res.status(500).json({message: e.message})
@@ -43,5 +53,27 @@ async function show(req, res) {
         res.json(publishing)
     } catch(e) {
         res.status(500).json({message: e.message})
+    }
+}
+
+async function update(req, res) {
+    try {
+        const match = await bcrypt.compare(req.body.password, req.user.password);
+        if(!match) throw new Error('The password is incorrect')
+        delete req.body.password
+        res.json(await Publishing.findByIdAndUpdate(req.params.id, req.body))
+    } catch(e) {
+        res.status(401).json({message: e.message})
+    }
+}
+
+async function deletePublishing(req, res) {
+    try {
+        const match = await bcrypt.compare(req.body.password, req.user.password);
+        if(!match) throw new Error('The password is incorrect')
+        await Publishing.findByIdAndDelete(req.params.id)
+        res.json({})
+    } catch(e) {
+        res.status(401).json({message: e.message})
     }
 }

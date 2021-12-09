@@ -60,6 +60,14 @@ export async function findPublishing(id) {
     return await publishingsAPI.find(id)
 }
 
+export async function updatePublishing(id, data) {
+    return await publishingsAPI.update(id, data)
+}
+
+export async function deletePublishing(id, credentials) {
+    return await publishingsAPI.deletePublishing(id, credentials)
+}
+
 //profiles
 export async function createProfile(profileData) {
     return await profilesAPI.create(profileData)
