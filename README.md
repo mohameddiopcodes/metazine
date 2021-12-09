@@ -1,6 +1,6 @@
 # Metazine
 
-A Place to share articles, documentation or any interesting pdfs and organise them.
+A Place to share articles, documentation or any interesting pdf and organise them.
 
 ## Getting Started
 
