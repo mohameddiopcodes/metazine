@@ -1,56 +1,53 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import PasswordForm from "../components/Settings/PasswordForm";
+import ProfileInfoForm from "../components/Settings/ProfileInfoForm";
+import ProfilePicForm from "../components/Settings/ProfilePicForm";
+import UserInfoForm from "../components/Settings/UserInfoForm";
+import DeleteConfirmation from "../components/DeleteConfirmation";
+import onDataChange from "../utilities/onDataChange";
 
-export default function Settings() {
-    const [userInfoForm, setUserInfoForm] = useState(false)
-    const [passwordForm, setPasswordForm] = useState(false)
-    const [profileInfoForm, setProfileInfoForm] = useState(false)
-    const [profilePicForm, setProfilePicForm] = useState(false)
-    const form = !userInfoForm && !passwordForm && !profileInfoForm && !profilePicForm
+export default function Settings({ profile, setProfile }) {
+    const [selected, setSelected] = useState(null)
+    const [formData, setFormData] = useState({})
+    const [message, setMessage] = useState('')
+
+    function handleSelected(e) {
+        const num = parseInt(e.target.title)
+        setMessage('')
+        setSelected(num)
+    }
+
+    function unselect(e, m = message) {
+        setSelected(null)
+        setFormData({})
+        if(m) setMessage(m)
+    }
+
+    function handleOnDataChange(e) {
+        onDataChange(e, setFormData, formData)
+    }
     return (
             <>
+            { message && <p>{message}</p>}
             {
-                !form && 
+                !selected && 
                 <div style={{maxWidth: '350px', margin: '2em auto', textAlign: 'left'}}>
                     <h4>User Settings</h4>
-                    <button style={{display: 'block'}}>update user information</button>
-                    <button style={{display: 'block'}}>update password</button>
+                    <button style={{display: 'block'}} title='1' onClick={handleSelected}>user information</button>
+                    <button style={{display: 'block'}} title='2' onClick={handleSelected}>password</button>
+                    <button style={{display: 'block'}} title='5' onClick={handleSelected}>delete account</button>
                     <h4>Profile Settings</h4>
-                    <button style={{display: 'block'}}>update profile information</button>
-                    <button style={{display: 'block'}}>update profile image</button>
+                    <button style={{display: 'block'}} title='3' onClick={handleSelected}>profile information</button>
+                    <button style={{display: 'block'}} title='4' onClick={handleSelected}>profile picture</button>
+                    <button style={{display: 'block'}} title='6' onClick={handleSelected}>delete profile</button>
                 </div>
             }
-            {
-                userInfoForm && 
-                <form>
-                    <input type='text' name='name'/>
-                    <input type='text' name='email'/>
-                    <input type='submit'/>
-                </form>
-            }
-            {
-                passwordForm && 
-                <form>
-                    <input type='password' name='prevPassword'/>
-                    <input type='password' name='password'/>
-                    <input type='password' name='confirm'/>
-                    <input type='submit'/>
-                </form>
-            }
-            {
-                profileInfoForm && 
-                <form>
-                    <input type='text' name='name'/>
-                    <input type='submit'/>
-                </form>
-            }
-            {
-                profilePicForm && 
-                <form>
-                    <input type='file' name='image'/>
-                    <input type='submit'/>
-                </form>
-            }
+            { selected === 1 && <UserInfoForm unselect={unselect} handleOnDataChange={handleOnDataChange} setProfile={setProfile} formData={formData} /> }
+            { selected === 2 && <PasswordForm unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} /> }
+            { selected === 3 && <ProfileInfoForm unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} profile={profile} setProfile={setProfile} /> }
+            { selected === 4 && <ProfilePicForm unselect={unselect} handleOnDataChange={handleOnDataChange} formData={formData} profile={profile} setProfile={setProfile} /> }
+            { selected === 5 && <DeleteConfirmation entity='account' unselect={unselect} /> }
+            { selected === 6 && <DeleteConfirmation entity='profile' unselect={unselect} /> }
             </>
             
     )

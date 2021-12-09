@@ -6,7 +6,11 @@ export default function MyPublishings({ profile }) {
     const [myPublishings, setMyPublishings] = useState([])
 
     useEffect(function() {
-        profile && profile._id && (async () => setMyPublishings([...await Publishings(profile._id)])) ()
+        try {
+            profile && profile._id && (async () => setMyPublishings([...await Publishings(profile._id)])) ()
+        } catch (e) {
+            setMyPublishings([])
+        }
     }, [profile])
 
     return (

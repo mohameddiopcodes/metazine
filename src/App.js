@@ -14,10 +14,16 @@ import {getUser, findProfile} from './api/service';
 
 function App() {
   const [user, setUser] = useState(getUser())
-  const [profile, setProfile] = useState((user && user.profiles[0]) || null)
+  const [profile, setProfile] = useState(null)
 
   useEffect(function() {
-    user && (async () => setProfile(await findProfile(localStorage.getItem('profile') || user.profiles[0])))()
+    try {
+      user && (async () => {
+        setProfile(await findProfile(localStorage.getItem('profile') || user.profiles[0]))
+      })()
+    } catch (e) {
+      setProfile(null)
+    }
   }, [user])
   
   return (
@@ -31,7 +37,7 @@ function App() {
             <Route path="/publishings" element={<Publishings />} />
             <Route path="/publishings/:id" element={<Publishing/>} />
             <Route path="/publishings/new" element={<NewPublishing profile={profile} />} />
-            <Route path="/settings" element={<Settings profile={profile} />} />
+            <Route path="/settings" element={<Settings profile={profile} setProfile={setProfile} />} />
           </Routes>
         </>
           :

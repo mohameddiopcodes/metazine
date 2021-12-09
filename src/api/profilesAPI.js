@@ -17,3 +17,11 @@ export async function me() {
 export async function find(id) {
     return sendRequest(`${BASE_URL}/${id}`)
 }
+
+export async function update(id, data) {
+    return sendRequest(`${BASE_URL}/${id}`, "PUT", data)
+}
+
+export async function deleteProfile(id, credentials) {
+    return sendRequest(`${BASE_URL}/delete/${id}`, "POST", credentials)
+}

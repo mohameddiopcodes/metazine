@@ -1,10 +1,14 @@
 const Profile = require('../models/Profile')
+const { createJWT } = require('./usersCtrl')
+const bcrypt = require('bcryptjs')
 
 module.exports = {
     create,
     index,
     me,
-    find
+    find,
+    update,
+    deleteProfile
 }
 
 async function create(req, res) {
@@ -41,4 +45,27 @@ async function find(req, res) {
     const id = req.params.id
     const profile = await Profile.findById(id)
     res.json(profile)
+}
+
+async function update(req, res) {
+    try {
+        const match = await bcrypt.compare(req.body.password, req.user.password);
+        if(!match) throw new Error('The password is incorrect')
+        await Profile.findByIdAndUpdate(req.params.id, req.body)
+        res.status(200).json(await Profile.findById(req.params.id))
+    } catch(e) {
+        res.status(401).json({message: e.message})
+    }
+}
+
+async function deleteProfile(req, res) {
+    try {
+        const match = await bcrypt.compare(req.body.password, req.user.password);
+        if(!match) throw new Error('The password is incorrect')
+        req.user.profiles = req.user.profiles.filter(id => id !== req.params.id)
+        req.user.save()
+        await Profile.findByIdAndDelete(req.params.id)
+    } catch(e) {
+        res.status(401).json({message: e.message})
+    }
 }

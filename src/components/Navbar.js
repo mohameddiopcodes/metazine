@@ -6,14 +6,18 @@ import onDataChange from '../utilities/onDataChange'
 
 export default function Navbar({ user, setUser, profile, setProfile }) {
 
-    const [profiles, setProfiles] = useState(false)
+    const [profiles, setProfiles] = useState([])
     const [showProfiles, setShowProfiles] = useState(false)
     const [showProfileForm, setShowProfileForm] = useState(false)
     const [profileFormData, setProfileFormData] = useState({})
     const navigate = useNavigate()
 
     useEffect(function() {
-        user && (async () => setProfiles(await myProfiles()))()
+        try {
+            user && (async () => setProfiles(await myProfiles()))()
+        } catch (e) {
+            setProfiles([])
+        }
     }, [])
 
     function handleNewProfile(e) {

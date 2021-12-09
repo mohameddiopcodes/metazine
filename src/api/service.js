@@ -25,15 +25,17 @@ export function getUser() {
     return token ? JSON.parse(window.atob(token.split('.')[1])).user : null;
 }
 
-export async function updateToken() {
-    // let token = getToken();
-    // const user = token ? JSON.parse(window.atob(token.split('.')[1])).user : null;
-    // if(user) {
-    //     localStorage.removeItem('token')
-    //     token = await logIn({email: user.email, password: user.password})
-    //     console.log(token)
-    //     localStorage.setItem('token', token)
-    // }
+export function updateToken(token) {
+    localStorage.removeItem('token')
+    localStorage.setItem('token', token)
+}
+
+export async function updateUser(data) {
+    return usersAPI.update(data)
+}
+
+export async function deleteAccount(credentials) {
+    return usersAPI.deleteAccount(credentials)
 }
 
 export function LogOut() {
@@ -73,4 +75,12 @@ export async function myProfiles() {
 
 export async function findProfile(id) {
     return await profilesAPI.find(id)
+}
+
+export async function updateProfile(id, data) {
+    return await profilesAPI.update(id, data)
+}
+
+export async function deleteProfile(id, credentials) {
+    return await profilesAPI.deleteProfile(id, credentials)
 }
