@@ -1,1 +1,1 @@
-web: nodemon ./src/api/bin/www
+web: node ./src/api/bin/www
